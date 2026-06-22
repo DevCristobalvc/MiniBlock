@@ -21,6 +21,15 @@
   padding: 0;
 }
 
+/* Hide all scrollbars globally */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
+
 html, body {
   height: 100%;
   background: var(--bg);
@@ -36,12 +45,19 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Background grid fills the whole page on desktop */
+  background-color: #000;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+    linear-gradient(to right, rgba(255,255,255,0.018) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
 .app-shell {
   width: 100%;
   max-width: 430px;
   height: 100dvh;
+  max-height: 900px;         /* cap on tall monitors so it doesn't feel stretched */
   position: relative;
   overflow: hidden;
   background-color: #000000;
@@ -49,6 +65,17 @@ html, body {
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
     linear-gradient(to right, rgba(255,255,255,0.025) 1px, transparent 1px);
   background-size: 40px 40px;
+  /* Subtle border on desktop so the card edge is visible */
+  border-left: 1px solid #1a1a1a;
+  border-right: 1px solid #1a1a1a;
+}
+
+/* On narrow mobile: full bleed, no borders */
+@media (max-width: 430px) {
+  .app-shell {
+    max-height: 100dvh;
+    border: none;
+  }
 }
 
 .btn-primary {
@@ -63,7 +90,7 @@ html, body {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 700;
-  padding: 16px 24px;
+  padding: 14px 24px;
   width: 100%;
   cursor: pointer;
   transition: opacity 0.15s, transform 0.1s;
@@ -72,15 +99,8 @@ html, body {
   -webkit-user-select: none;
 }
 
-.btn-primary:active {
-  opacity: 0.85;
-  transform: scale(0.98);
-}
-
-.btn-primary:disabled {
-  opacity: 0.4;
-  cursor: default;
-}
+.btn-primary:active { opacity: 0.85; transform: scale(0.98); }
+.btn-primary:disabled { opacity: 0.4; cursor: default; }
 
 .btn-secondary {
   display: flex;
@@ -94,7 +114,7 @@ html, body {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
   font-weight: 600;
-  padding: 16px 24px;
+  padding: 14px 24px;
   width: 100%;
   cursor: pointer;
   transition: border-color 0.15s, transform 0.1s;
@@ -102,10 +122,7 @@ html, body {
   -webkit-user-select: none;
 }
 
-.btn-secondary:active {
-  border-color: var(--accent);
-  transform: scale(0.98);
-}
+.btn-secondary:active { border-color: var(--accent); transform: scale(0.98); }
 
 .card {
   background: var(--surface-raised);
@@ -128,47 +145,19 @@ html, body {
   letter-spacing: 0.5px;
   text-transform: uppercase;
   font-family: var(--font-mono);
+  white-space: nowrap;
 }
 
-.badge-accent {
-  background: var(--accent);
-  color: var(--accent-text);
-  border-color: var(--accent);
-}
-
-.badge-green {
-  background: rgba(34,197,94,0.12);
-  color: var(--green);
-  border-color: rgba(34,197,94,0.25);
-}
-
-.badge-red {
-  background: rgba(239,68,68,0.12);
-  color: var(--red);
-  border-color: rgba(239,68,68,0.25);
-}
+.badge-accent { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+.badge-green  { background: rgba(34,197,94,0.12); color: var(--green); border-color: rgba(34,197,94,0.25); }
+.badge-red    { background: rgba(239,68,68,0.12); color: var(--red);   border-color: rgba(239,68,68,0.25); }
 
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
+  from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes pulse-accent {
   0%, 100% { box-shadow: 0 0 0 0 rgba(252,255,82,0.4); }
-  50%       { box-shadow: 0 0 0 12px rgba(252,255,82,0); }
-}
-
-@keyframes flash-green {
-  0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
-  100% { box-shadow: 0 0 32px 8px rgba(34,197,94,0); }
-}
-
-@keyframes flash-red {
-  0%   { box-shadow: 0 0 0 0 rgba(239,68,68,0.7); }
-  100% { box-shadow: 0 0 32px 8px rgba(239,68,68,0); }
-}
-
-@keyframes scanline {
-  from { background-position: 0 0; }
-  to   { background-position: 0 100%; }
+  50%       { box-shadow: 0 0 0 10px rgba(252,255,82,0); }
 }
