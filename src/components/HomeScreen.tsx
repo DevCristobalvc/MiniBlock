@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function HomeScreen({ onPlay, onLeaderboard }: Props) {
-  const { address, shortAddress, connected, connecting, error, isMiniPay, connect } = useWallet();
+  const { shortAddress, connected, connecting, error, isMiniPay, connect } = useWallet();
   const { lang, t, setLang } = useLanguage();
   const [tickHash, setTickHash] = useState(randomBlockHash());
   const [blockHeight] = useState(() => 4_200_000 + Math.floor(Math.random() * 9999));
@@ -112,7 +112,7 @@ export default function HomeScreen({ onPlay, onLeaderboard }: Props) {
         <div style={{ background: '#090909', border: '1px solid #181818', borderRadius: 10, padding: '10px 12px', marginBottom: 4 }}>
           <p style={{ fontSize: 9, color: '#2a2a2a', fontFamily: 'var(--font-mono)', letterSpacing: '0.5px', marginBottom: 8, textTransform: 'uppercase' }}>{t.home.howTitle}</p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            {(t.home.how as [string, string][]).map(([n, text]) => (
+            {t.home.how.map(([n, text]) => (
               <div key={n} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                 <span style={{ fontSize: 9, fontFamily: 'var(--font-mono)', color: 'var(--accent)', fontWeight: 700, flexShrink: 0, paddingTop: 2 }}>{n}</span>
                 <span style={{ fontSize: 11, color: '#555', lineHeight: 1.4 }}>{text}</span>
