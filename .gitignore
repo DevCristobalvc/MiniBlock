@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+
+# Smart contract repositorie 
+/sc-miniblock
+
+# memory
+/memory
