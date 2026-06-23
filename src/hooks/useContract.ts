@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { createPublicClient, createWalletClient, custom, http, parseUnits, formatUnits, type PublicClient } from 'viem';
+import { createPublicClient, http, formatUnits, type PublicClient } from 'viem';
 import { celo, celoAlfajores } from 'viem/chains';
 import { useWallet } from './useWallet';
 import type { Currency } from '../utils/prizes';
@@ -73,7 +73,7 @@ export interface PlayerEntry {
   claimed: boolean;
 }
 
-function decimalsForCurrency(c: Currency) { return 18; }
+function decimalsForCurrency(_c: Currency) { return 18; }
 
 function detectCurrency(tokenAddr: string): Currency {
   const lower = tokenAddr.toLowerCase();
